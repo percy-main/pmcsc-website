@@ -1,4 +1,4 @@
-import type { MetaFunction } from "@remix-run/node";
+import { json, type LinksFunction } from "@netlify/remix-runtime";
 import {
   Links,
   LiveReload,
@@ -6,15 +6,25 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
+import { Suspense, lazy } from "react";
 
-export const meta: MetaFunction = () => [{
-  charset: "utf-8",
-  title: "New Remix App",
-  viewport: "width=device-width,initial-scale=1",
-}];
+const VisualEditing = lazy(() => import("~/components/VisualEditing"));
+
+export const loader = () => {
+  return json({
+    ENV: {
+      SANITY_STUDIO_PROJECT_ID: process.env.SANITY_STUDIO_PROJECT_ID,
+      SANITY_STUDIO_DATASET: process.env.SANITY_STUDIO_DATASET,
+      SANITY_STUDIO_URL: process.env.SANITY_STUDIO_URL,
+      SANITY_STUDIO_STEGA_ENABLED: process.env.SANITY_STUDIO_STEGA_ENABLED,
+    },
+  });
+};
 
 export default function App() {
+  const { ENV } = useLoaderData<typeof loader>();
   return (
     <html lang="en">
       <head>
@@ -24,6 +34,11 @@ export default function App() {
       <body>
         <Outlet />
         <ScrollRestoration />
+        {ENV.SANITY_STUDIO_STEGA_ENABLED ? (
+          <Suspense>
+            <VisualEditing />
+          </Suspense>
+        ) : null}
         <Scripts />
         <LiveReload />
       </body>

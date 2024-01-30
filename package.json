@@ -1,5 +1,5 @@
 {
-  "name": "pmcsc-website",
+  "name": "pmcsc",
   "private": true,
   "sideEffects": false,
   "type": "module",
@@ -12,8 +12,15 @@
   "dependencies": {
     "@netlify/functions": "^2.0.0",
     "@netlify/remix-adapter": "^2.0.0",
+    "@netlify/remix-runtime": "^2.1.0",
+    "@portabletext/types": "^2.0.8",
     "@remix-run/node": "^2.5.1",
     "@remix-run/react": "^2.5.1",
+    "@sanity/client": "^6.12.3",
+    "@sanity/image-url": "^1.0.2",
+    "@sanity/overlays": "^2.3.9",
+    "@sanity/react-loader": "^1.8.1",
+    "@sanity/types": "^3.26.1",
     "cross-env": "^7.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
