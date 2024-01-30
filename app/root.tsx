@@ -9,16 +9,19 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import { Suspense, lazy } from "react";
+import * as projectDetails from "./sanity/projectDetails";
 
 const VisualEditing = lazy(() => import("~/components/VisualEditing"));
 
 export const loader = () => {
   return json({
     ENV: {
-      SANITY_STUDIO_PROJECT_ID: process.env.SANITY_STUDIO_PROJECT_ID,
-      SANITY_STUDIO_DATASET: process.env.SANITY_STUDIO_DATASET,
-      SANITY_STUDIO_URL: process.env.SANITY_STUDIO_URL,
-      SANITY_STUDIO_STEGA_ENABLED: process.env.SANITY_STUDIO_STEGA_ENABLED,
+      SANITY_STUDIO_PROJECT_ID: projectDetails.projectId,
+      SANITY_STUDIO_DATASET: projectDetails.dataset,
+      SANITY_STUDIO_STEGA_ENABLED: projectDetails.stegaEnabled,
+      SANITY_STUDIO_API_VERSION: projectDetails.apiVersion,
+      SANITY_FRONTEND_URL: projectDetails.frontendUrl,
+      SANITY_STUDIO_URL: projectDetails.studioUrl,
     },
   });
 };
@@ -40,6 +43,11 @@ export default function App() {
       <body>
         <Outlet />
         <ScrollRestoration />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV = ${JSON.stringify(ENV)}`,
+          }}
+        />
         {ENV.SANITY_STUDIO_STEGA_ENABLED ? (
           <Suspense>
             <VisualEditing />

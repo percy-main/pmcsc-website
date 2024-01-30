@@ -6,8 +6,7 @@
   "scripts": {
     "build": "remix build",
     "dev": "remix dev",
-    "start": "netlify serve",
-    "typecheck": "tsc -b"
+    "start": "netlify serve"
   },
   "dependencies": {
     "@netlify/functions": "^2.0.0",
@@ -16,14 +15,22 @@
     "@portabletext/types": "^2.0.8",
     "@remix-run/node": "^2.5.1",
     "@remix-run/react": "^2.5.1",
+    "@resvg/resvg-js": "^2.6.0",
     "@sanity/client": "^6.12.3",
+    "@sanity/icons": "^2.10.0",
     "@sanity/image-url": "^1.0.2",
     "@sanity/overlays": "^2.3.9",
     "@sanity/react-loader": "^1.8.1",
     "@sanity/types": "^3.26.1",
+    "@sanity/ui": "^2.0.1",
+    "@sanity/vision": "^3.26.1",
     "cross-env": "^7.0.3",
+    "groq": "^3.26.1",
+    "lucide-react": "^0.319.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "sanity": "^3.26.1",
+    "satori": "^0.10.13"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.5.1",
@@ -31,7 +38,8 @@
     "@remix-run/serve": "^2.5.1",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
-    "eslint": "^8.27.0",
+    "eslint": "^8.56.0",
+    "prettier": "^3.2.4",
     "typescript": "^5.2.2"
   },
   "engines": {
