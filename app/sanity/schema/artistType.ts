@@ -1,5 +1,5 @@
-import {Users} from 'lucide-react'
-import {defineField, defineType} from 'sanity'
+import { Users } from 'lucide-react'
+import { defineField, defineType } from 'sanity'
 
 export const artistType = defineType({
   name: 'artist',
@@ -21,7 +21,7 @@ export const artistType = defineType({
     defineField({
       name: 'image',
       type: 'image',
-      options: {hotspot: true},
+      options: { hotspot: true },
     }),
   ],
 })

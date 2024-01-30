@@ -1,6 +1,6 @@
-import {ComposeIcon, MenuIcon, ThListIcon} from '@sanity/icons'
-import {Disc} from 'lucide-react'
-import {defineField, defineType} from 'sanity'
+import { ComposeIcon, MenuIcon, ThListIcon } from '@sanity/icons'
+import { Disc } from 'lucide-react'
+import { defineField, defineType } from 'sanity'
 
 export const recordType = defineType({
   name: 'record',
@@ -12,7 +12,7 @@ export const recordType = defineType({
       name: 'rating',
       title: 'Rating',
       description: 'These fields are written to from the Remix front end',
-      options: {columns: 2},
+      options: { columns: 2 },
     },
   ],
   groups: [
@@ -65,32 +65,32 @@ export const recordType = defineType({
     defineField({
       name: 'artist',
       type: 'reference',
-      to: [{type: 'artist'}],
+      to: [{ type: 'artist' }],
       group: 'details',
     }),
     defineField({
       name: 'genres',
       type: 'array',
-      of: [{type: 'reference', to: {type: 'genre'}}],
+      of: [{ type: 'reference', to: { type: 'genre' } }],
       group: 'details',
     }),
     defineField({
       name: 'content',
       type: 'array',
-      of: [{type: 'block'}, {type: 'image'}],
+      of: [{ type: 'block' }, { type: 'image' }],
       group: 'editorial',
     }),
     defineField({
       name: 'image',
       type: 'image',
-      options: {hotspot: true},
+      options: { hotspot: true },
       group: 'editorial',
-      fields: [defineField({name: 'alt', type: 'string'})],
+      fields: [defineField({ name: 'alt', type: 'string' })],
     }),
     defineField({
       name: 'tracks',
       type: 'array',
-      of: [{type: 'track'}],
+      of: [{ type: 'track' }],
       group: 'tracks',
     }),
   ],
@@ -100,7 +100,7 @@ export const recordType = defineType({
       artist: 'artist.name',
       media: 'image',
     },
-    prepare({title, artist, media}) {
+    prepare({ title, artist, media }) {
       return {
         title,
         subtitle: artist,

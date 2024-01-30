@@ -1,4 +1,4 @@
-import { json, MetaFunction, type LinksFunction } from "@netlify/remix-runtime";
+import { json, type MetaFunction } from '@netlify/remix-runtime'
 import {
   Links,
   LiveReload,
@@ -7,11 +7,11 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
-} from "@remix-run/react";
-import { Suspense, lazy } from "react";
-import * as projectDetails from "./sanity/projectDetails";
+} from '@remix-run/react'
+import { lazy, Suspense } from 'react'
+import * as projectDetails from './sanity/projectDetails'
 
-const VisualEditing = lazy(() => import("~/components/VisualEditing"));
+const VisualEditing = lazy(() => import('~/components/VisualEditing'))
 
 export const loader = () => {
   return json({
@@ -23,17 +23,17 @@ export const loader = () => {
       SANITY_FRONTEND_URL: projectDetails.frontendUrl,
       SANITY_STUDIO_URL: projectDetails.studioUrl,
     },
-  });
-};
+  })
+}
 
 export const meta: MetaFunction = () => [
-  { rel: "icon", href: "/favicon.ico" },
-  { rel: "apple-touch-icon", href: "/android-chrome-192x192.png" },
-  { rel: "manifest", href: "/manifest.json" },
-];
+  { rel: 'icon', href: '/favicon.ico' },
+  { rel: 'apple-touch-icon', href: '/android-chrome-192x192.png' },
+  { rel: 'manifest', href: '/manifest.json' },
+]
 
 export default function App() {
-  const { ENV } = useLoaderData<typeof loader>();
+  const { ENV } = useLoaderData<typeof loader>()
   return (
     <html lang="en">
       <head>
@@ -57,5 +57,5 @@ export default function App() {
         <LiveReload />
       </body>
     </html>
-  );
+  )
 }

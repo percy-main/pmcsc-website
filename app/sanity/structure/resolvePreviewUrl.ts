@@ -1,6 +1,6 @@
-import type {SanityClient, SanityDocument, Slug} from 'sanity'
+import type { SanityClient, SanityDocument, Slug } from 'sanity'
 
-export type SanityDocumentWithSlug = SanityDocument & {slug: Slug}
+export type SanityDocumentWithSlug = SanityDocument & { slug: Slug }
 
 export async function resolvePreviewUrl(
   doc: SanityDocumentWithSlug,
