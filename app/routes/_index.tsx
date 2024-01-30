@@ -1,14 +1,17 @@
+import { AppShell, Title } from '@mantine/core'
 import { type MetaFunction } from '@remix-run/react'
-import Welcome from '~/components/Welcome'
 
 export const meta: MetaFunction = () => {
   return [{ title: 'Percy Main Cricket and Sports Club' }]
 }
 
-export default function Index() {
+export default function BasicAppShell() {
   return (
-    <section>
-      <Welcome />
-    </section>
+    <AppShell header={{ height: 60 }} padding="md">
+      <AppShell.Header>
+        <Title>Percy Main Cricket and Sports Club</Title>
+      </AppShell.Header>
+      <AppShell.Main>Main</AppShell.Main>
+    </AppShell>
   )
 }
