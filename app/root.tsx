@@ -1,4 +1,4 @@
-import { json, type LinksFunction } from "@netlify/remix-runtime";
+import { json, MetaFunction, type LinksFunction } from "@netlify/remix-runtime";
 import {
   Links,
   LiveReload,
@@ -22,6 +22,12 @@ export const loader = () => {
     },
   });
 };
+
+export const meta: MetaFunction = () => [
+  { rel: "icon", href: "/favicon.ico" },
+  { rel: "apple-touch-icon", href: "/android-chrome-192x192.png" },
+  { rel: "manifest", href: "/manifest.json" },
+];
 
 export default function App() {
   const { ENV } = useLoaderData<typeof loader>();
