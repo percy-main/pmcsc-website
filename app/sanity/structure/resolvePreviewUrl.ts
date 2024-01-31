@@ -17,11 +17,5 @@ export async function resolvePreviewUrl(
     previewUrl.searchParams.set('slug', doc.slug.current)
   }
 
-  // const secret = await getSecret(client, SECRET_ID, true)
-
-  // if (secret) {
-  // previewUrl.searchParams.set('secret', secret)
-  // }
-
   return previewUrl.toString()
 }

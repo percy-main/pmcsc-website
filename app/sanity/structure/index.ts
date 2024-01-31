@@ -1,4 +1,4 @@
-import { Home } from 'lucide-react'
+import { Home, SpeechIcon } from 'lucide-react'
 import type {
   DefaultDocumentNodeResolver,
   StructureResolver,
@@ -19,6 +19,9 @@ export const structure: StructureResolver = S =>
         .id('home')
         .title('Home'),
       S.divider(),
+      S.documentTypeListItem('announcement')
+        .title('Announcements')
+        .icon(SpeechIcon),
     ])
 
 export const defaultDocumentNode: DefaultDocumentNodeResolver = (

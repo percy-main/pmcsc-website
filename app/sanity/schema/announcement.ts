@@ -19,6 +19,16 @@ export const announcement = defineType({
       },
     }),
     defineField({
+      name: 'content',
+      type: 'array',
+      title: 'Content',
+      of: [
+        {
+          type: 'block',
+        },
+      ],
+    }),
+    defineField({
       name: 'image',
       type: 'image',
       options: { hotspot: true },
