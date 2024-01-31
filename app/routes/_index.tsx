@@ -1,5 +1,6 @@
-import { AppShell, Title } from '@mantine/core'
+import { AppShell, Group, Title } from '@mantine/core'
 import { type MetaFunction } from '@remix-run/react'
+import { ClubLogo } from '../components/ClubLogo'
 
 export const meta: MetaFunction = () => {
   return [{ title: 'Percy Main Cricket and Sports Club' }]
@@ -7,11 +8,14 @@ export const meta: MetaFunction = () => {
 
 export default function BasicAppShell() {
   return (
-    <AppShell header={{ height: 60 }} padding="md">
+    <AppShell header={{ height: 120 }} padding="md" withBorder={false}>
       <AppShell.Header>
-        <Title>Percy Main Cricket and Sports Club</Title>
+        <Group>
+          <ClubLogo />
+          <Title>Percy Main Cricket and Sports Club</Title>
+        </Group>
       </AppShell.Header>
-      <AppShell.Main>Main</AppShell.Main>
+      <AppShell.Main></AppShell.Main>
     </AppShell>
   )
 }
