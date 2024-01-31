@@ -1,3 +1,5 @@
+import type { DefaultMantineColor, MantineColorsTuple } from '@mantine/core'
+
 export {}
 declare global {
   interface ProcessEnv {
@@ -24,5 +26,13 @@ declare global {
       SANITY_STUDIO_API_VERSION: string
       SANITY_FRONTEND_URL: string
     }
+  }
+}
+
+type ExtendedCustomColors = 'pmccMaroon' | DefaultMantineColor
+
+declare module '@mantine/core' {
+  export interface MantineThemeColorsOverride {
+    colors: Record<ExtendedCustomColors, MantineColorsTuple>
   }
 }

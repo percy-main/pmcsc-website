@@ -55,7 +55,27 @@ export default function App() {
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider>
+        <MantineProvider
+          theme={{
+            fontFamily: 'Roboto, sans-serif',
+            fontFamilyMonospace: 'Monaco, Courier, monospace',
+            headings: { fontFamily: 'Greycliff CF, sans-serif' },
+            colors: {
+              pmccMaroon: [
+                '#ffeeee',
+                '#f4dbdb',
+                '#e4b5b6',
+                '#d78c8c',
+                '#ca696a',
+                '#c35354',
+                '#c14749',
+                '#aa393a',
+                '#993133',
+                '#87262a',
+              ],
+            },
+          }}
+        >
           <Outlet />
           <ScrollRestoration />
           <script

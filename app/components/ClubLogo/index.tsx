@@ -1,5 +1,5 @@
 import { Image } from '@mantine/core'
-import logo from './club_logo.jpeg'
+import logo from './club_logo.png'
 
 export const ClubLogo = () => {
   return (
