@@ -10,6 +10,7 @@ declare global {
     SANITY_STUDIO_STEGA_ENABLED: string
     SANITY_STUDIO_API_VERSION: string
     SANITY_FRONTEND_URL: string
+    SANITY_READ_TOKEN: string
   }
 
   interface Process {

@@ -85,7 +85,7 @@ export default function App() {
           />
           {ENV.SANITY_STUDIO_STEGA_ENABLED ? (
             <Suspense>
-              <VisualEditing />
+              <VisualEditing studioUrl={ENV.SANITY_STUDIO_URL} />
             </Suspense>
           ) : null}
           <Scripts />

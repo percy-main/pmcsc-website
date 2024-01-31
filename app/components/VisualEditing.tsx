@@ -1,37 +1,64 @@
 import { useLocation, useNavigate } from '@remix-run/react'
 import type { HistoryUpdate } from '@sanity/overlays'
 import { enableOverlays } from '@sanity/overlays'
-import { useLiveMode } from '@sanity/react-loader'
-import { useEffect, useRef } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 
 import { client } from '~/sanity/client'
+import { useLiveMode } from '~/sanity/loader'
 
-export default function VisualEditing() {
+type VisualEditingProps = {
+  studioUrl: string
+}
+
+// Default export required for React Lazy loading
+// eslint-disable-next-line import/no-default-export
+export default function VisualEditing({ studioUrl }: VisualEditingProps) {
+  const stegaClient = useMemo(
+    () =>
+      client.withConfig({
+        stega: {
+          enabled: true,
+          studioUrl,
+        },
+      }),
+    [studioUrl],
+  )
+
   const navigateRemix = useNavigate()
   const navigateComposerRef = useRef<null | ((update: HistoryUpdate) => void)>(
     null,
   )
 
   useEffect(() => {
-    const disable = enableOverlays({
-      history: {
-        subscribe: navigate => {
-          navigateComposerRef.current = navigate
-          return () => {
-            navigateComposerRef.current = null
-          }
+    // When displayed inside an iframe
+    if (window.parent !== window.self) {
+      const disable = enableOverlays({
+        zIndex: 999999,
+        history: {
+          subscribe: navigate => {
+            navigateComposerRef.current = navigate
+            return () => {
+              navigateComposerRef.current = null
+            }
+          },
+          update: update => {
+            if (update.type === 'push' || update.type === 'replace') {
+              navigateRemix(update.url, { replace: update.type === 'replace' })
+            } else if (update.type === 'pop') {
+              navigateRemix(-1)
+            }
+          },
         },
-        update: update => {
-          if (update.type === 'push' || update.type === 'replace') {
-            navigateRemix(update.url, { replace: update.type === 'replace' })
-          } else if (update.type === 'pop') {
-            navigateRemix(-1)
-          }
-        },
-      },
-    })
-    return () => disable()
-  }, [navigateRemix])
+      })
+      return () => disable()
+    } else {
+      if (typeof document !== 'undefined') {
+        console.log(
+          `Stega is enabled but Visual Editing is configured to only display in an iframe.`,
+        )
+      }
+    }
+  }, [navigateRemix, studioUrl])
 
   const location = useLocation()
   useEffect(() => {
@@ -43,8 +70,8 @@ export default function VisualEditing() {
     }
   }, [location.hash, location.pathname, location.search])
 
-  // Enable live queries using the client configuration
-  useLiveMode({ client })
+  // Enable live queries from the specified studio origin URL
+  useLiveMode({ client: stegaClient })
 
   return null
 }

@@ -8,16 +8,42 @@ import {
   Title,
   useMantineTheme,
 } from '@mantine/core'
-import { type MetaFunction } from '@remix-run/react'
+import { json, useLoaderData, type MetaFunction } from '@remix-run/react'
+import { useQuery } from '@sanity/react-loader'
+import groq from 'groq'
+import { z } from 'zod'
 import { ClubLogo } from '../components/ClubLogo'
 import { Hero } from '../components/Hero'
+import { loadQuery } from '../sanity/loader.server'
+
+export const home = z.object({
+  title: z.string().nullable(),
+})
 
 export const meta: MetaFunction = () => {
   return [{ title: 'Percy Main Cricket and Sports Club' }]
 }
 
+export const loader = async () => {
+  const query = groq`*[_id == "home"][0]{ title, siteTitle }`
+  const params = {}
+
+  const { data } = await loadQuery(query, params)
+
+  return json({
+    initial: { data: home.parse(data) },
+    query,
+    params,
+  })
+}
+
 export default function BasicAppShell() {
   const theme = useMantineTheme()
+  const { initial, query, params } = useLoaderData<typeof loader>()
+  const { data } = useQuery<typeof initial.data>(query, params, {
+    //@ts-ignore
+    initial,
+  })
 
   return (
     <AppShell
@@ -50,7 +76,7 @@ export default function BasicAppShell() {
         <Group>
           <ClubLogo />
           <Title style={{ color: theme.colors.gray[1] }}>
-            Percy Main Cricket and Sports Club
+            {data?.title ?? ''}
           </Title>
         </Group>
       </AppShell.Header>
