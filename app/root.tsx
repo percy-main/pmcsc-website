@@ -10,28 +10,19 @@ import {
   Links,
   LiveReload,
   Meta,
-  Outlet,
   Scripts,
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react'
+import { useQuery } from '@sanity/react-loader'
+import groq from 'groq'
 import { Suspense, lazy } from 'react'
+import { z } from 'zod'
+import { Layout } from '~/components/Layout'
+import { loadQuery } from './sanity/loader.server'
 import * as projectDetails from './sanity/projectDetails'
 
 const VisualEditing = lazy(() => import('~/components/VisualEditing'))
-
-export const loader = () => {
-  return json({
-    ENV: {
-      SANITY_STUDIO_PROJECT_ID: projectDetails.projectId,
-      SANITY_STUDIO_DATASET: projectDetails.dataset,
-      SANITY_STUDIO_STEGA_ENABLED: projectDetails.stegaEnabled,
-      SANITY_STUDIO_API_VERSION: projectDetails.apiVersion,
-      SANITY_FRONTEND_URL: projectDetails.frontendUrl,
-      SANITY_STUDIO_URL: projectDetails.studioUrl,
-    },
-  })
-}
 
 export const meta: MetaFunction = () => [
   { rel: 'icon', href: '/favicon.ico' },
@@ -45,8 +36,40 @@ export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
 ]
 
+const schema = z.object({
+  title: z.string(),
+})
+
+export const loader = async () => {
+  const query = groq`*[_id == "home"][0]{ title, siteTitle }`
+  const params = {}
+
+  const { data } = await loadQuery(query, params)
+
+  console.log('data', data)
+
+  return json({
+    initial: { data: schema.parse(data) },
+    query,
+    params,
+    ENV: {
+      SANITY_STUDIO_PROJECT_ID: projectDetails.projectId,
+      SANITY_STUDIO_DATASET: projectDetails.dataset,
+      SANITY_STUDIO_STEGA_ENABLED: projectDetails.stegaEnabled,
+      SANITY_STUDIO_API_VERSION: projectDetails.apiVersion,
+      SANITY_FRONTEND_URL: projectDetails.frontendUrl,
+      SANITY_STUDIO_URL: projectDetails.studioUrl,
+    },
+  })
+}
+
 export default function App() {
-  const { ENV } = useLoaderData<typeof loader>()
+  const { initial, query, params, ENV } = useLoaderData<typeof loader>()
+  const { data } = useQuery<typeof initial.data>(query, params, {
+    //@ts-ignore
+    initial,
+  })
+
   return (
     <html lang="en">
       <head>
@@ -76,7 +99,7 @@ export default function App() {
             },
           }}
         >
-          <Outlet />
+          <Layout title={data?.title ?? ''} />
           <ScrollRestoration />
           <script
             dangerouslySetInnerHTML={{

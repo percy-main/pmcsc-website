@@ -38,13 +38,11 @@ export const announcement = defineType({
   preview: {
     select: {
       title: 'title',
-      artist: 'artist.name',
       media: 'image',
     },
-    prepare({ title, artist, media }) {
+    prepare({ title, media }) {
       return {
         title,
-        subtitle: artist,
         media,
       }
     },

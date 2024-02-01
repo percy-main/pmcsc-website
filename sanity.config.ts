@@ -2,10 +2,10 @@ import { presentationTool } from '@sanity/presentation'
 import { visionTool } from '@sanity/vision'
 import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
-import { locate } from './presentation/locate'
-import { frontendUrl, projectDetails } from './projectDetails'
-import * as schema from './schema'
-import { defaultDocumentNode, structure } from './structure'
+import { locate } from './app/sanity/presentation/locate'
+import { frontendUrl, projectDetails } from './app/sanity/projectDetails'
+import * as schema from './app/sanity/schema'
+import { defaultDocumentNode, structure } from './app/sanity/structure'
 
 export const config = defineConfig({
   ...projectDetails(),
