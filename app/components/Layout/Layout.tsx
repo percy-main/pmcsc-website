@@ -48,7 +48,13 @@ export const Layout: FC<Props> = ({ children }) => {
           <ClubLogo />
         </Group>
       </AppShell.Header>
-      <AppShell.Main pl={0} pr={0} pt={118} pb={120}>
+      <AppShell.Main
+        pl={0}
+        pr={0}
+        pt={118}
+        pb={120}
+        style={{ background: 'white' }}
+      >
         {children}
       </AppShell.Main>
       <AppShell.Footer
