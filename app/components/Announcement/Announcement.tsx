@@ -11,7 +11,7 @@ type Props = {
     asset: {
       url: string
     }
-    alt: string
+    alt?: string
   }
 }
 
