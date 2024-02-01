@@ -7,19 +7,30 @@ type Props = {
   title: string
   content: {}[]
   createdAt: string
-  imageUrl?: string
+  image?: {
+    asset: {
+      url: string
+    }
+    alt: string
+  }
 }
 
 export const Announcement: FC<Props> = ({
   title,
   content,
   createdAt,
-  imageUrl,
+  image,
 }) => {
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Card.Section>
-        <Image src={imageUrl} height={160} alt="Norway" />
+        {image ? (
+          <Image
+            src={`${image.asset.url}?h=160`}
+            height={160}
+            alt={image.alt}
+          />
+        ) : null}
       </Card.Section>
 
       <Group justify="space-between" mt="md" mb="xs">

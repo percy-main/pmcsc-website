@@ -26,7 +26,7 @@ export const Layout: FC<Props> = ({ title }) => {
       padding="md"
       withBorder={false}
       style={{
-        backgroundColor: theme.colors.pmccMaroon[2],
+        backgroundColor: theme.colors.pmccMaroon[3],
       }}
     >
       <AppShell.Header

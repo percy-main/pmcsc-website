@@ -46,8 +46,6 @@ export const loader = async () => {
 
   const { data } = await loadQuery(query, params)
 
-  console.log('data', data)
-
   return json({
     initial: { data: schema.parse(data) },
     query,
