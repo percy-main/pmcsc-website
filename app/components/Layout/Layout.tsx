@@ -29,6 +29,7 @@ export const Layout: FC<Props> = ({ children }) => {
           backgroundColor: theme.colors.pmccMaroon[5],
           justifyContent: 'center',
           display: 'flex',
+          backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.2))`,
         }}
         p="md"
       >
@@ -40,7 +41,6 @@ export const Layout: FC<Props> = ({ children }) => {
             left: 0,
             width: '100%',
             height: '100%',
-            backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3))`,
             opacity: 0.2,
           }}
         ></Box>
@@ -53,9 +53,9 @@ export const Layout: FC<Props> = ({ children }) => {
       </AppShell.Main>
       <AppShell.Footer
         style={{
-          backgroundColor: theme.colors.pmccMaroon[7],
+          backgroundColor: theme.colors.pmccMaroon[5],
           color: theme.colors.gray[3],
-          backgroundImage: `linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))`,
+          backgroundImage: `linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2))`,
         }}
       >
         <Container style={{ height: '100%' }}>
