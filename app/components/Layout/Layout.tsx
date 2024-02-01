@@ -5,7 +5,6 @@ import {
   Group,
   Stack,
   Text,
-  Title,
   useMantineTheme,
 } from '@mantine/core'
 import { Outlet } from '@remix-run/react'
@@ -21,7 +20,7 @@ export const Layout: FC<Props> = ({ title }) => {
 
   return (
     <AppShell
-      header={{ height: 120 }}
+      header={{ height: { xs: 120, base: 90 } }}
       footer={{ height: 120 }}
       padding="md"
       withBorder={false}
@@ -32,6 +31,8 @@ export const Layout: FC<Props> = ({ title }) => {
       <AppShell.Header
         style={{
           backgroundColor: theme.colors.pmccMaroon[5],
+          justifyContent: 'center',
+          display: 'flex',
         }}
         p="md"
       >
@@ -49,16 +50,16 @@ export const Layout: FC<Props> = ({ title }) => {
         ></Box>
         <Group>
           <ClubLogo />
-          <Title style={{ color: theme.colors.gray[1] }}>{title}</Title>
         </Group>
       </AppShell.Header>
-      <AppShell.Main pl={0} pr={0} pt={118}>
+      <AppShell.Main pl={0} pr={0} pt={118} pb={120}>
         <Outlet />
       </AppShell.Main>
       <AppShell.Footer
         style={{
           backgroundColor: theme.colors.pmccMaroon[7],
           color: theme.colors.gray[3],
+          backgroundImage: `linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))`,
         }}
       >
         <Container style={{ height: '100%' }}>

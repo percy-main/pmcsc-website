@@ -2,10 +2,10 @@ import { Container, Group } from '@mantine/core'
 import { json, useLoaderData, type MetaFunction } from '@remix-run/react'
 import groq from 'groq'
 import { z } from 'zod'
+import { Announcement } from '~/components/Announcement'
+import { Hero } from '~/components/Hero'
 import { loadQuery } from '~/sanity/loader.server'
 import { useQuery } from '~/sanity/useQuery'
-import { Announcement } from '../components/Announcement'
-import { Hero } from '../components/Hero'
 
 export const meta: MetaFunction = () => {
   return [{ title: 'Percy Main Cricket and Sports Club' }]

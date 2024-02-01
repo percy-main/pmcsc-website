@@ -95,6 +95,13 @@ export default function App() {
                 '#87262a',
               ],
             },
+            breakpoints: {
+              xs: '24em',
+              sm: '48em',
+              md: '64em',
+              lg: '74em',
+              xl: '90em',
+            },
           }}
         >
           <Layout title={data?.title ?? ''} />
