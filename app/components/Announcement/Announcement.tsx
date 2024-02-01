@@ -22,7 +22,7 @@ export const Announcement: FC<Props> = ({
   image,
 }) => {
   return (
-    <Card shadow="sm" padding="lg" radius="md" withBorder>
+    <Card shadow="xl" padding="lg" radius="md" withBorder>
       <Card.Section>
         {image ? (
           <Image

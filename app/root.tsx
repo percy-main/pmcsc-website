@@ -10,16 +10,12 @@ import {
   Links,
   LiveReload,
   Meta,
+  Outlet,
   Scripts,
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react'
-import { useQuery } from '@sanity/react-loader'
-import groq from 'groq'
 import { Suspense, lazy } from 'react'
-import { z } from 'zod'
-import { Layout } from '~/components/Layout'
-import { loadQuery } from './sanity/loader.server'
 import * as projectDetails from './sanity/projectDetails'
 
 const VisualEditing = lazy(() => import('~/components/VisualEditing'))
@@ -36,20 +32,8 @@ export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
 ]
 
-const schema = z.object({
-  title: z.string(),
-})
-
 export const loader = async () => {
-  const query = groq`*[_id == "home"][0]{ title, siteTitle }`
-  const params = {}
-
-  const { data } = await loadQuery(query, params)
-
   return json({
-    initial: { data: schema.parse(data) },
-    query,
-    params,
     ENV: {
       SANITY_STUDIO_PROJECT_ID: projectDetails.projectId,
       SANITY_STUDIO_DATASET: projectDetails.dataset,
@@ -62,11 +46,7 @@ export const loader = async () => {
 }
 
 export default function App() {
-  const { initial, query, params, ENV } = useLoaderData<typeof loader>()
-  const { data } = useQuery<typeof initial.data>(query, params, {
-    //@ts-ignore
-    initial,
-  })
+  const { ENV } = useLoaderData<typeof loader>()
 
   return (
     <html lang="en">
@@ -104,7 +84,7 @@ export default function App() {
             },
           }}
         >
-          <Layout title={data?.title ?? ''} />
+          <Outlet />
           <ScrollRestoration />
           <script
             dangerouslySetInnerHTML={{

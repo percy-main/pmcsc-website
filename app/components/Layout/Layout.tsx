@@ -7,15 +7,14 @@ import {
   Text,
   useMantineTheme,
 } from '@mantine/core'
-import { Outlet } from '@remix-run/react'
 import type { FC } from 'react'
 import { ClubLogo } from '~/components/ClubLogo'
 
 export type Props = {
-  title: string
+  children: React.ReactNode
 }
 
-export const Layout: FC<Props> = ({ title }) => {
+export const Layout: FC<Props> = ({ children }) => {
   const theme = useMantineTheme()
 
   return (
@@ -24,9 +23,6 @@ export const Layout: FC<Props> = ({ title }) => {
       footer={{ height: 120 }}
       padding="md"
       withBorder={false}
-      style={{
-        backgroundColor: theme.colors.pmccMaroon[3],
-      }}
     >
       <AppShell.Header
         style={{
@@ -44,7 +40,7 @@ export const Layout: FC<Props> = ({ title }) => {
             left: 0,
             width: '100%',
             height: '100%',
-            backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0))`,
+            backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3))`,
             opacity: 0.2,
           }}
         ></Box>
@@ -53,7 +49,7 @@ export const Layout: FC<Props> = ({ title }) => {
         </Group>
       </AppShell.Header>
       <AppShell.Main pl={0} pr={0} pt={118} pb={120}>
-        <Outlet />
+        {children}
       </AppShell.Main>
       <AppShell.Footer
         style={{

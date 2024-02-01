@@ -6,6 +6,7 @@ import { Announcement } from '~/components/Announcement'
 import { Hero } from '~/components/Hero'
 import { loadQuery } from '~/sanity/loader.server'
 import { useQuery } from '~/sanity/useQuery'
+import { Layout } from '../components/Layout'
 
 export const meta: MetaFunction = () => {
   return [{ title: 'Percy Main Cricket and Sports Club' }]
@@ -23,7 +24,10 @@ const schema = z.array(
           _id: z.string(),
           url: z.string(),
         }),
-        alt: z.string(),
+        alt: z
+          .string()
+          .nullable()
+          .transform(value => (value ? value : undefined)),
       })
       .nullable()
       .transform(value => (value ? value : undefined)),
@@ -36,8 +40,6 @@ export const loader = async () => {
   const params = {}
 
   const { data } = await loadQuery(query, params)
-
-  console.log(data)
 
   const announcement = schema.parse(data)
 
@@ -52,7 +54,7 @@ export default function Index() {
   const { initial, query, params } = useLoaderData<typeof loader>()
   const { data } = useQuery(query, params, { initial })
   return (
-    <>
+    <Layout>
       <Hero />
       <Container mt={-60}>
         <Group m="md">
@@ -67,6 +69,6 @@ export default function Index() {
           ))}
         </Group>
       </Container>
-    </>
+    </Layout>
   )
 }
