@@ -40,9 +40,7 @@ export const Announcement: FC<Props> = ({
         <Text fw={500}>{title}</Text>
       </Stack>
 
-      <Text size="sm" c="dimmed">
-        <SanityContent value={content} />
-      </Text>
+      <SanityContent value={content} />
 
       <Button color="blue" fullWidth mt="md" radius="md">
         Read full story

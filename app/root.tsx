@@ -30,6 +30,16 @@ export const meta: MetaFunction = () => [
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
+  { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+  {
+    rel: 'preconnect',
+    href: 'https://fonts.gstatic.com',
+    crossOrigin: 'anonymous',
+  },
+  {
+    href: 'https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap',
+    rel: 'stylesheet',
+  },
 ]
 
 export const loader = async () => {
@@ -60,7 +70,7 @@ export default function App() {
           theme={{
             fontFamily: 'Roboto, sans-serif',
             fontFamilyMonospace: 'Monaco, Courier, monospace',
-            headings: { fontFamily: 'Greycliff CF, sans-serif' },
+            headings: { fontFamily: `'Josefin Sans', 'sans-serif'` },
             colors: {
               pmccMaroon: [
                 '#ffeeee',

@@ -56,7 +56,7 @@ export default function Index() {
   return (
     <Layout>
       <Hero />
-      <Container mt={-60}>
+      <Container>
         <Group m="md" align="stretch">
           {data.map(announcement => (
             <Announcement

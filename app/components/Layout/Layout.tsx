@@ -5,6 +5,7 @@ import {
   Group,
   Stack,
   Text,
+  rem,
   useMantineTheme,
 } from '@mantine/core'
 import { useHeadroom } from '@mantine/hooks'
@@ -22,25 +23,25 @@ export const Layout: FC<Props> = ({ children }) => {
   return (
     <AppShell
       header={{
-        height: { xs: 120, base: 90 },
-        offset: false,
+        height: 120,
+        offset: true,
         collapsed: !pinned,
       }}
-      footer={{ height: 120 }}
-      padding="md"
+      footer={{ height: 120, offset: true }}
+      padding={0}
       withBorder={false}
     >
       <Box
         style={{
           ...(pinned
             ? {
-                left: '1rem',
-                top: '1rem',
+                left: '1.4rem',
+                top: '1.4rem',
               }
             : {
-                transform: 'scale(0.5)',
-                left: '-1rem',
-                top: '-1rem',
+                transform: 'scale(0.7)',
+                left: '-0.6rem',
+                top: '-0.6rem',
               }),
           transition: 'all 0.5s ease',
           zIndex: 999,
@@ -55,26 +56,8 @@ export const Layout: FC<Props> = ({ children }) => {
           backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.2))`,
         }}
         p="md"
-      >
-        <Box
-          component="div"
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            opacity: 0.2,
-          }}
-        ></Box>
-      </AppShell.Header>
-      <AppShell.Main
-        pl={0}
-        pr={0}
-        pt={118}
-        pb={120}
-        style={{ background: 'white' }}
-      >
+      ></AppShell.Header>
+      <AppShell.Main style={{ background: 'white' }} pt={`${rem(120)}`}>
         {children}
       </AppShell.Main>
       <AppShell.Footer
