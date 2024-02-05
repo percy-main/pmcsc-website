@@ -1,4 +1,4 @@
-import { Badge, Button, Card, Group, Image, Text } from '@mantine/core'
+import { Badge, Button, Card, Image, Stack, Text } from '@mantine/core'
 import type { FC } from 'react'
 import { DateDisplay } from '../DateDisplay'
 import { SanityContent } from '../SanityContent'
@@ -22,23 +22,23 @@ export const Announcement: FC<Props> = ({
   image,
 }) => {
   return (
-    <Card shadow="xl" padding="lg" radius="md" withBorder>
+    <Card shadow="xl" padding="lg" radius="md" withBorder w={320}>
       <Card.Section>
         {image ? (
           <Image
-            src={`${image.asset.url}?h=160`}
+            src={`${image.asset.url}?h=160&w=320&fit=crop&auto=format`}
             height={160}
             alt={image.alt}
           />
         ) : null}
       </Card.Section>
 
-      <Group justify="space-between" mt="md" mb="xs">
-        <Text fw={500}>{title}</Text>
+      <Stack justify="space-between" mt="md" mb="xs">
         <Badge color="pmccMaroon">
           <DateDisplay date={createdAt} />
         </Badge>
-      </Group>
+        <Text fw={500}>{title}</Text>
+      </Stack>
 
       <Text size="sm" c="dimmed">
         <SanityContent value={content} />

@@ -7,6 +7,7 @@ import {
   Text,
   useMantineTheme,
 } from '@mantine/core'
+import { useHeadroom } from '@mantine/hooks'
 import type { FC } from 'react'
 import { ClubLogo } from '~/components/ClubLogo'
 
@@ -16,19 +17,41 @@ export type Props = {
 
 export const Layout: FC<Props> = ({ children }) => {
   const theme = useMantineTheme()
+  const pinned = useHeadroom({ fixedAt: 120 })
 
   return (
     <AppShell
-      header={{ height: { xs: 120, base: 90 } }}
+      header={{
+        height: { xs: 120, base: 90 },
+        offset: false,
+        collapsed: !pinned,
+      }}
       footer={{ height: 120 }}
       padding="md"
       withBorder={false}
     >
+      <Box
+        style={{
+          ...(pinned
+            ? {
+                left: '1rem',
+                top: '1rem',
+              }
+            : {
+                transform: 'scale(0.5)',
+                left: '-1rem',
+                top: '-1rem',
+              }),
+          transition: 'all 0.5s ease',
+          zIndex: 999,
+          position: 'fixed',
+        }}
+      >
+        <ClubLogo />
+      </Box>
       <AppShell.Header
         style={{
           backgroundColor: theme.colors.pmccMaroon[5],
-          justifyContent: 'center',
-          display: 'flex',
           backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.2))`,
         }}
         p="md"
@@ -44,9 +67,6 @@ export const Layout: FC<Props> = ({ children }) => {
             opacity: 0.2,
           }}
         ></Box>
-        <Group>
-          <ClubLogo />
-        </Group>
       </AppShell.Header>
       <AppShell.Main
         pl={0}
