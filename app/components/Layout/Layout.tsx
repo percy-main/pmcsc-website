@@ -93,7 +93,7 @@ export const Layout: FC<Props> = ({ children }) => {
           >
             <Text>Registered charity: 1206787</Text>
             <Stack gap={0}>
-              <Text>Percy Main Cricket Club</Text>
+              <Text>Percy Main Cricket and Sports Club</Text>
               <Text>St. John's Terrace</Text>
               <Text>North Shields</Text>
               <Text>NE29 6HS</Text>
