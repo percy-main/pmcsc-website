@@ -21,6 +21,6 @@ export const config = defineConfig({
   ],
   basePath: `/studio`,
   schema: {
-    types: [schema.home, schema.announcement],
+    types: [schema.home, schema.announcement, schema.trustee],
   },
 })

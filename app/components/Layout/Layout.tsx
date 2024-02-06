@@ -4,11 +4,12 @@ import {
   Container,
   Group,
   Stack,
-  Text,
+  Title,
   rem,
   useMantineTheme,
 } from '@mantine/core'
 import { useHeadroom } from '@mantine/hooks'
+import { Link } from '@remix-run/react'
 import type { FC } from 'react'
 import { ClubLogo } from '~/components/ClubLogo'
 
@@ -48,7 +49,9 @@ export const Layout: FC<Props> = ({ children }) => {
           position: 'fixed',
         }}
       >
-        <ClubLogo />
+        <Link to="/">
+          <ClubLogo />
+        </Link>
       </Box>
       <AppShell.Header
         style={{
@@ -74,12 +77,60 @@ export const Layout: FC<Props> = ({ children }) => {
             align="center"
             style={{ height: '100%' }}
           >
-            <Text>Registered charity: 1206787</Text>
+            <Stack align="center">
+              <Title
+                style={{
+                  color: theme.colors.gray[3],
+                }}
+                order={6}
+              >
+                Registered charity: 1206787
+              </Title>
+              <Link to="/trustees">
+                <Title
+                  style={{
+                    color: theme.colors.gray[3],
+                    textDecoration: 'underline',
+                  }}
+                  order={6}
+                >
+                  Our trustees
+                </Title>
+              </Link>
+            </Stack>
             <Stack gap={0}>
-              <Text>Percy Main Cricket and Sports Club</Text>
-              <Text>St. John's Terrace</Text>
-              <Text>North Shields</Text>
-              <Text>NE29 6HS</Text>
+              <Title
+                style={{
+                  color: theme.colors.gray[3],
+                }}
+                order={6}
+              >
+                Percy Main Cricket and Sports Club
+              </Title>
+              <Title
+                style={{
+                  color: theme.colors.gray[3],
+                }}
+                order={6}
+              >
+                St. John's Terrace
+              </Title>
+              <Title
+                style={{
+                  color: theme.colors.gray[3],
+                }}
+                order={6}
+              >
+                North Shields
+              </Title>
+              <Title
+                style={{
+                  color: theme.colors.gray[3],
+                }}
+                order={6}
+              >
+                NE29 6HS
+              </Title>
             </Stack>
           </Group>
         </Container>
