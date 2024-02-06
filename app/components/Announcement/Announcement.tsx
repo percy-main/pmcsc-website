@@ -1,4 +1,4 @@
-import { Badge, Button, Card, Image, Stack, Text } from '@mantine/core'
+import { Badge, Button, Card, Image, Stack, Title } from '@mantine/core'
 import type { FC } from 'react'
 import { DateDisplay } from '../DateDisplay'
 import { SanityContent } from '../SanityContent'
@@ -33,18 +33,20 @@ export const Announcement: FC<Props> = ({
         ) : null}
       </Card.Section>
 
-      <Stack justify="space-between" mt="md" mb="xs">
-        <Badge color="pmccMaroon">
-          <DateDisplay date={createdAt} />
-        </Badge>
-        <Text fw={500}>{title}</Text>
+      <Stack justify="space-between" mt="md" mb="xs" style={{ flexGrow: 1 }}>
+        <Stack justify="flex-start">
+          <Badge color="pmccMaroon">
+            <DateDisplay date={createdAt} />
+          </Badge>
+          <Title order={4}>{title}</Title>
+
+          <SanityContent value={content} />
+        </Stack>
+
+        <Button color="blue" fullWidth mt="md" radius="md">
+          Read full story
+        </Button>
       </Stack>
-
-      <SanityContent value={content} />
-
-      <Button color="blue" fullWidth mt="md" radius="md">
-        Read full story
-      </Button>
     </Card>
   )
 }
