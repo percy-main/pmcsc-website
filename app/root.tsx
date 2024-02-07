@@ -1,10 +1,6 @@
 import { ColorSchemeScript, MantineProvider } from '@mantine/core'
 import '@mantine/core/styles.css'
-import {
-  json,
-  type LinksFunction,
-  type MetaFunction,
-} from '@netlify/remix-runtime'
+import { json, type LinksFunction } from '@netlify/remix-runtime'
 import { cssBundleHref } from '@remix-run/css-bundle'
 import {
   Links,
@@ -20,14 +16,6 @@ import * as projectDetails from './sanity/projectDetails'
 
 const VisualEditing = lazy(() => import('~/components/VisualEditing'))
 
-export const meta: MetaFunction = () => [
-  { rel: 'icon', href: '/favicon.ico' },
-  { rel: 'apple-touch-icon', href: '/android-chrome-192x192.png' },
-  { rel: 'manifest', href: '/manifest.json' },
-  { charSet: 'utf-8' },
-  { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-]
-
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -37,7 +25,7 @@ export const links: LinksFunction = () => [
     crossOrigin: 'anonymous',
   },
   {
-    href: 'https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap',
+    href: 'https://fonts.googleapis.com/css2?family=Baloo+2&&family=Titillium+Webdisplay=swap',
     rel: 'stylesheet',
   },
 ]
@@ -61,6 +49,11 @@ export default function App() {
   return (
     <html lang="en">
       <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/android-chrome-192x192.png" />
+        <link rel="manifest" href="/manifest.json" />
         <Meta />
         <Links />
         <ColorSchemeScript />
@@ -68,9 +61,9 @@ export default function App() {
       <body>
         <MantineProvider
           theme={{
-            fontFamily: 'Roboto, sans-serif',
+            fontFamily: `'Titillium Web', Roboto, sans-serif`,
             fontFamilyMonospace: 'Monaco, Courier, monospace',
-            headings: { fontFamily: `'Josefin Sans', 'sans-serif'` },
+            headings: { fontFamily: `'Baloo 2', 'sans-serif'` },
             colors: {
               pmccMaroon: [
                 '#ffeeee',

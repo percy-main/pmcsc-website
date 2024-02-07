@@ -8,7 +8,7 @@ import { Layout } from '../components/Layout'
 import { Trustee } from '../components/Trustee'
 
 export const meta: MetaFunction = () => {
-  return [{ title: 'Percy Main Cricket and Sports Club' }]
+  return [{ title: 'Percy Main Cricket and Sports Club - Trustees' }]
 }
 
 const schema = z.array(
