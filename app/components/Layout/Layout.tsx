@@ -59,21 +59,7 @@ export const Layout: FC<Props> = ({ children }) => {
           backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.2))`,
         }}
         p="md"
-      >
-        <Stack
-          h="100%"
-          style={{ alignItems: 'flex-end', justifyContent: 'center' }}
-        >
-          <Title
-            order={1}
-            style={{ color: theme.colors.pmccMaroon[0], textAlign: 'right' }}
-            pr="md"
-            pt="xl"
-          >
-            Percy Main Cricket and Sports Club
-          </Title>
-        </Stack>
-      </AppShell.Header>
+      ></AppShell.Header>
       <AppShell.Main style={{ background: 'white' }} pt={`${rem(120)}`}>
         {children}
       </AppShell.Main>

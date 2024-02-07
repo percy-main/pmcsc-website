@@ -10,8 +10,6 @@ type VisualEditingProps = {
   studioUrl: string
 }
 
-// Default export required for React Lazy loading
-// eslint-disable-next-line import/no-default-export
 export default function VisualEditing({ studioUrl }: VisualEditingProps) {
   const stegaClient = useMemo(
     () =>
@@ -51,12 +49,6 @@ export default function VisualEditing({ studioUrl }: VisualEditingProps) {
         },
       })
       return () => disable()
-    } else {
-      if (typeof document !== 'undefined') {
-        console.log(
-          `Stega is enabled but Visual Editing is configured to only display in an iframe.`,
-        )
-      }
     }
   }, [navigateRemix, studioUrl])
 
