@@ -49,6 +49,7 @@ export const AnnouncementCard: FC<Props> = ({
         <Link
           style={{ textDecoration: 'none' }}
           to={`/announcement/${slug.current}`}
+          prefetch="intent"
         >
           <Button color="blue" fullWidth mt="md" radius="md">
             Read full story

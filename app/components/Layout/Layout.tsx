@@ -49,7 +49,7 @@ export const Layout: FC<Props> = ({ children }) => {
           position: 'fixed',
         }}
       >
-        <Link to="/">
+        <Link prefetch="intent" to="/">
           <ClubLogo />
         </Link>
       </Box>
@@ -86,7 +86,7 @@ export const Layout: FC<Props> = ({ children }) => {
               >
                 Registered charity: 1206787
               </Title>
-              <Link to="/trustees">
+              <Link to="/trustees" prefetch="render">
                 <Title
                   style={{
                     color: theme.colors.gray[3],
