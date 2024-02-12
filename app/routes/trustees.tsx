@@ -41,7 +41,7 @@ const schema = z.array(
 
 export const loader = async () => {
   const query = groq`*[_type == "trustee"]{ 'id': _id, name, bio, role, image{
-    asset->{_id, url}, alt }} | order(name asc)[0...100]`
+    asset->{_id, url}, alt }} | order(_createdAt asc)[0...100]`
   const params = {}
 
   const { data } = await loadQuery(query, params)
