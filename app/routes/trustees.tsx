@@ -1,4 +1,4 @@
-import { Container, Group } from '@mantine/core'
+import { Container, Group, Stack, Title } from '@mantine/core'
 import { json, useLoaderData, type MetaFunction } from '@remix-run/react'
 import groq from 'groq'
 import { z } from 'zod'
@@ -60,18 +60,21 @@ export default function Index() {
   const { data } = useQuery(query, params, { initial })
   return (
     <Layout>
-      <Container>
-        <Group m="md" align="stretch">
-          {data.map(trustee => (
-            <Trustee
-              key={trustee.id}
-              name={trustee.name}
-              role={trustee.role}
-              bio={trustee.bio}
-              image={trustee.image}
-            />
-          ))}
-        </Group>
+      <Container fluid>
+        <Stack p="xl" justify="center" align="center">
+          <Title order={1}>Our Trustees</Title>
+          <Group p="xl" align="stretch" justify="center">
+            {data.map(trustee => (
+              <Trustee
+                key={trustee.id}
+                name={trustee.name}
+                role={trustee.role}
+                bio={trustee.bio}
+                image={trustee.image}
+              />
+            ))}
+          </Group>
+        </Stack>
       </Container>
     </Layout>
   )
