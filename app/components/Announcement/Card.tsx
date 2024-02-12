@@ -1,4 +1,5 @@
 import { Badge, Button, Card, Image, Stack, Title } from '@mantine/core'
+import { Link } from '@remix-run/react'
 import type { FC } from 'react'
 import { DateDisplay } from '../DateDisplay'
 import { SanityContent } from '../SanityContent'
@@ -7,6 +8,7 @@ type Props = {
   title: string
   content: {}[]
   createdAt: string
+  slug: { current: string }
   image?: {
     asset: {
       url: string
@@ -15,11 +17,12 @@ type Props = {
   }
 }
 
-export const Announcement: FC<Props> = ({
+export const AnnouncementCard: FC<Props> = ({
   title,
   content,
   createdAt,
   image,
+  slug,
 }) => {
   return (
     <Card shadow="xl" padding="lg" radius="md" withBorder w={320}>
@@ -43,9 +46,14 @@ export const Announcement: FC<Props> = ({
           <SanityContent value={content} />
         </Stack>
 
-        <Button color="blue" fullWidth mt="md" radius="md">
-          Read full story
-        </Button>
+        <Link
+          style={{ textDecoration: 'none' }}
+          to={`/announcement/${slug.current}`}
+        >
+          <Button color="blue" fullWidth mt="md" radius="md">
+            Read full story
+          </Button>
+        </Link>
       </Stack>
     </Card>
   )

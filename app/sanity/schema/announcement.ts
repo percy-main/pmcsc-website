@@ -19,6 +19,15 @@ export const announcement = defineType({
       },
     }),
     defineField({
+      name: 'summary',
+      type: 'array',
+      of: [
+        {
+          type: 'block',
+        },
+      ],
+    }),
+    defineField({
       name: 'content',
       type: 'array',
       title: 'Content',

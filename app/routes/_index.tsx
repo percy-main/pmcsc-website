@@ -1,8 +1,8 @@
-import { Container, Group } from '@mantine/core'
+import { Container, Group, Title } from '@mantine/core'
 import { json, useLoaderData, type MetaFunction } from '@remix-run/react'
 import groq from 'groq'
 import { z } from 'zod'
-import { Announcement } from '~/components/Announcement'
+import { AnnouncementCard } from '~/components/Announcement'
 import { Hero } from '~/components/Hero'
 import { loadQuery } from '~/sanity/loader.server'
 import { useQuery } from '~/sanity/useQuery'
@@ -16,7 +16,10 @@ const schema = z.array(
   z.object({
     id: z.string(),
     title: z.string(),
-    content: z.array(z.any()),
+    slug: z.object({
+      current: z.string(),
+    }),
+    summary: z.array(z.any()),
     createdAt: z.string(),
     image: z
       .object({
@@ -35,7 +38,7 @@ const schema = z.array(
 )
 
 export const loader = async () => {
-  const query = groq`*[_type == "announcement"][0...5]{ 'id': _id, title, content, image, 'createdAt': _createdAt, image{
+  const query = groq`*[_type == "announcement"][0...5]{ 'id': _id, title, summary, slug, image, 'createdAt': _createdAt, image{
     asset->{_id, url}, alt }}`
   const params = {}
 
@@ -57,13 +60,21 @@ export default function Index() {
     <Layout>
       <Hero />
       <Container>
-        <Group m="md" align="stretch">
+        <Title p="xl" order={2}>
+          Our mission is to promote community participation in healthy
+          recreation in Percy Main, North Shields and surrounding areas for the
+          public benefit by the provision of fields, nets/equipment, changing
+          facilities and practice facilities for participation of cricket,
+          football and other sports.
+        </Title>
+        <Group m="md" p="xl" align="stretch">
           {data.map(announcement => (
-            <Announcement
+            <AnnouncementCard
               key={announcement.id}
               createdAt={announcement.createdAt}
+              slug={announcement.slug}
               title={announcement.title}
-              content={announcement.content}
+              content={announcement.summary}
               image={announcement.image}
             />
           ))}
