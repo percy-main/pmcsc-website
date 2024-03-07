@@ -1,0 +1,7 @@
+.trustee {
+    flex-basis: 50%;
+
+    @media (min-width: $mantine-breakpoint-md) {
+      flex-basis: 25%;
+    }
+  }
