@@ -12,6 +12,7 @@ declare global {
     SANITY_FRONTEND_URL: string
     SANITY_READ_TOKEN: string
     GIFT_AID_WEBHOOK: string
+    PLAYER_REG_WEBHOOK: string
   }
 
   interface Process {

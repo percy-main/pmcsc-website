@@ -1,5 +1,6 @@
 import { ColorSchemeScript, MantineProvider } from '@mantine/core'
 import '@mantine/core/styles.css'
+import '@mantine/dates/styles.css'
 import { json, type LinksFunction } from '@netlify/remix-runtime'
 import { cssBundleHref } from '@remix-run/css-bundle'
 import {

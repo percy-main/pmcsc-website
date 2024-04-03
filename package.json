@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@mantine/core": "^7.5.0",
+    "@mantine/dates": "^7.7.1",
     "@mantine/hooks": "^7.5.0",
     "@netlify/functions": "^2.0.0",
     "@netlify/remix-adapter": "^2.0.0",

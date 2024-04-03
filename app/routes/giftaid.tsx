@@ -16,6 +16,7 @@ import {
   json,
   useActionData,
   useNavigation,
+  useSearchParams,
   type MetaFunction,
 } from '@remix-run/react'
 import { Layout } from '../components/Layout'
@@ -48,6 +49,14 @@ export default function Declaration() {
   const navigation = useNavigation()
   const result = useActionData<typeof action>()
 
+  const [params] = useSearchParams()
+
+  const title = params.get('title') ?? undefined
+  const firstName = params.get('firstName') ?? undefined
+  const surname = params.get('surname') ?? undefined
+  const address = params.get('address') ?? undefined
+  const postcode = params.get('postcode') ?? undefined
+
   return (
     <Layout>
       <Container>
@@ -69,11 +78,36 @@ export default function Declaration() {
                 the current tax year. Your address is needed to identify you as
                 a current UK taxpayer.
               </Text>
-              <TextInput name="title" label="Title" required />
-              <TextInput name="firstName" label="First Name" required />
-              <TextInput name="surname" label="Surname" required />
-              <Textarea name="address" label="Address" required />
-              <TextInput name="postcode" label="Postcode" required />
+              <TextInput
+                name="title"
+                label="Title"
+                defaultValue={title}
+                required
+              />
+              <TextInput
+                name="firstName"
+                label="First Name"
+                defaultValue={firstName}
+                required
+              />
+              <TextInput
+                name="surname"
+                label="Surname"
+                defaultValue={surname}
+                required
+              />
+              <Textarea
+                name="address"
+                label="Address"
+                defaultValue={address}
+                required
+              />
+              <TextInput
+                name="postcode"
+                label="Postcode"
+                defaultValue={postcode}
+                required
+              />
 
               <InputLabel>
                 <Group wrap="nowrap">
