@@ -11,6 +11,7 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react'
+import 'normalize.css'
 import { Suspense, lazy } from 'react'
 import * as projectDetails from './sanity/projectDetails'
 
