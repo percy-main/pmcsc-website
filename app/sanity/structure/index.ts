@@ -1,4 +1,9 @@
-import { Home, PersonStandingIcon, SpeechIcon } from 'lucide-react'
+import {
+  BanknoteIcon,
+  Home,
+  PersonStandingIcon,
+  SpeechIcon,
+} from 'lucide-react'
 import type {
   DefaultDocumentNodeResolver,
   StructureResolver,
@@ -18,10 +23,14 @@ export const structure: StructureResolver = S =>
       S.documentTypeListItem('trustee')
         .icon(PersonStandingIcon)
         .title('Trustees'),
-      S.divider(),
       S.documentTypeListItem('announcement')
         .title('Announcements')
         .icon(SpeechIcon),
+      S.documentListItem()
+        .schemaType('bankDetails')
+        .icon(BanknoteIcon)
+        .id('bankDetails')
+        .title('Bank Details'),
     ])
 
 export const defaultDocumentNode: DefaultDocumentNodeResolver = S => {

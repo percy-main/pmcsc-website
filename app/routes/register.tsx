@@ -16,10 +16,15 @@ import {
   Link,
   json,
   useActionData,
+  useLoaderData,
   useNavigation,
   type MetaFunction,
 } from '@remix-run/react'
+import groq from 'groq'
+import { z } from 'zod'
+import { loadQuery } from '~/sanity/loader.server'
 import { Layout } from '../components/Layout'
+import { useQuery } from '../sanity/useQuery'
 
 export const meta: MetaFunction = () => {
   return [
@@ -55,9 +60,35 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
   }
 }
 
+const schema = z.object({
+  accountName: z.string(),
+  accountNumber: z.string(),
+  sortCode: z.string(),
+})
+
+const query = groq`*[_type == "bankDetails"]{ accountName, accountNumber, sortCode }[0]`
+
+export const loader = async () => {
+  const params = {}
+
+  const { data } = await loadQuery(query, params)
+
+  console.log({ data })
+
+  const bankDetails = schema.parse(data)
+
+  return json({
+    initial: { data: bankDetails },
+    query,
+    params,
+  })
+}
+
 export default function Declaration() {
   const navigation = useNavigation()
   const result = useActionData<typeof action>()
+  const { initial, query, params } = useLoaderData<typeof loader>()
+  const { data } = useQuery(query, params, { initial })
 
   return (
     <Layout>
@@ -80,11 +111,11 @@ export default function Declaration() {
             <p>Our bank details for payment are:</p>
             <dl>
               <dt>Account Name</dt>
-              <dd>Percy Main Cricket and Sports Club</dd>
+              <dd>{data.accountName}</dd>
               <dt>Sort Code</dt>
-              <dd>82-12-08</dd>
+              <dd>{data.sortCode}</dd>
               <dt>Account Number</dt>
-              <dd>00057645</dd>
+              <dd>{data.accountNumber}</dd>
             </dl>
           </>
         ) : (
